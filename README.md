@@ -23,10 +23,10 @@ O browser abrirá automaticamente com a página principal.
 Caso o browser não inicie, vá até o endereço http://localhost:4200/ .
 
 ## Stack
-[NodeJS](https://nodejs.org/en/) 
-[Angular 6](https://angular.io/) 
-[Typescript](https://www.typescriptlang.org/) 
-[Javascript](https://pt.wikipedia.org/wiki/JavaScript) 
-[SASS](http://sass-lang.com) 
-[HTML 5](https://en.wikipedia.org/wiki/HTML5) 
-[PrimeNg](https://www.primefaces.org/primeng/) 
+[NodeJS](https://nodejs.org/en/)  
+[Angular 6](https://angular.io/)  
+[Typescript](https://www.typescriptlang.org/)  
+[Javascript](https://pt.wikipedia.org/wiki/JavaScript)  
+[SASS](http://sass-lang.com)  
+[HTML 5](https://en.wikipedia.org/wiki/HTML5)  
+[PrimeNg](https://www.primefaces.org/primeng/)  
