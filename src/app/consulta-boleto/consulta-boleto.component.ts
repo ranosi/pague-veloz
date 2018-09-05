@@ -6,8 +6,8 @@ import { IInvoice } from '../models/invoice';
 import { BoletoService } from '../boleto.service';
 import { SharedFunctions } from '../shared/shared-functions.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 import * as moment from "moment";
-
 @Component({
   selector: 'app-consulta-boleto',
   templateUrl: './consulta-boleto.component.html',
@@ -31,7 +31,8 @@ export class ConsultaBoletoComponent implements OnInit {
     private boletoService: BoletoService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private sharedFunctions: SharedFunctions
+    private sharedFunctions: SharedFunctions,
+    private router: Router,
   ) { }
 
   public ngOnInit() {
@@ -67,6 +68,14 @@ export class ConsultaBoletoComponent implements OnInit {
       today: 'Hoje',
       clear: 'Limpar'
     };
+
+    let filtro = JSON.parse(sessionStorage.getItem('pesquisa'))
+    if(filtro) {
+      filtro.dataInicio = this.sharedFunctions.date(filtro.dataInicio);
+      filtro.dataFim = this.sharedFunctions.date(filtro.dataFim);
+      this.formQueryInvoice.patchValue(filtro);
+      this.submitQueryInvoice();
+    }
   }
 
   public createFormQueryInvoice() {
@@ -84,6 +93,8 @@ export class ConsultaBoletoComponent implements OnInit {
 
   public submitQueryInvoice() {
     if (this.formQueryInvoice.invalid) return;
+
+    sessionStorage.setItem('pesquisa', JSON.stringify(this.formQueryInvoice.value))
 
     const data = this.formQueryInvoice.value;
     data.dataInicio = this.sharedFunctions.dateParse(data.dataInicio);
@@ -127,8 +138,13 @@ export class ConsultaBoletoComponent implements OnInit {
     });
   }
 
+  public detail(invoice: any) {
+    this.router.navigate(['detalhe', invoice.Id]);
+  }
+
   public btnClearForm() {
     this.formQueryInvoice.reset();
+    sessionStorage.removeItem('pesquisa')
   }
 
 }

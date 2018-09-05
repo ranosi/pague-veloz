@@ -11,12 +11,18 @@ export class SharedFunctions {
   }
 
   public dateParse(date: Date): string {
+    if(!date) return;
     return moment(date).format();
   }
 
   public dateDefault(date: Date | string): string {
     if(!date) return;
     return moment(date).format("DD-MM-YYYY");
+  }
+
+  public date(date) {
+    if(!date) return;
+    return moment(date).toDate()
   }
 
   public datePlusday(addDays:number, date: Date): Date {

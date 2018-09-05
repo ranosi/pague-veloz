@@ -37,7 +37,7 @@ export class BoletoService {
 
     return this.http.get<IInvoiceQuery>(`${this.reqUrl}/v4/Boleto?${httpParams}`, httpOptions)
       .pipe(
-        map((boletos: IInvoice[])=> {
+        map((boletos: any)=> {
           boletos.map((boleto: IInvoice) => {
             boleto.Emissao = this.sharedFunctions.dateDefault(boleto.Emissao);
             boleto.Vencimento = this.sharedFunctions.dateDefault(boleto.Vencimento);
@@ -50,8 +50,22 @@ export class BoletoService {
       )
   }
 
-  public deleteInvoices(params: number):Observable<any> {
-    return this.http.delete(`${this.reqUrl}/v5/Boleto/${params}`, httpOptions);
+  public showInvoice(id: number) {
+    return this.http.get(`${this.reqUrl}/v4/Boleto/${id}`, httpOptions)
+      .pipe(
+        map((boleto: any)=> {
+          boleto.Emissao = this.sharedFunctions.dateDefault(boleto.Emissao);
+          boleto.Vencimento = this.sharedFunctions.dateDefault(boleto.Vencimento);
+          boleto.Valor = this.sharedFunctions.labelMoney(boleto.Valor);
+          boleto.Cancelado = this.sharedFunctions.translateStatus(boleto.Cancelado);
+          boleto.EstaVencido = this.sharedFunctions.translateStatus(boleto.EstaVencido);
+          return boleto;
+        })
+      )
+  }
+
+  public deleteInvoices(id: number):Observable<any> {
+    return this.http.delete(`${this.reqUrl}/v5/Boleto/${id}`, httpOptions);
   }
 
 }

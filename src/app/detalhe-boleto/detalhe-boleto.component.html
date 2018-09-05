@@ -1,0 +1,67 @@
+<p-panel>
+  <p-header>
+    <h1 class="title--main" style="font-size: 20px">Dados do boleto</h1>
+    <span style="font-size: 16px">Informação completa do boleto emitido</span>
+  </p-header>
+  <div *ngIf="invoice">
+    <div class="ui-g">
+      <div class="ui-g-6 ui-lg-3 ui-sm-4">
+        <label>Sacado</label>
+        <p>{{ invoice.Sacado }}</p>
+      </div>
+      <div class="ui-g-6 ui-lg-3 ui-sm-4">
+        <label>Documento</label>
+        <p>{{ invoice.Documento }}</p>
+      </div>
+      <div class="ui-g-6 ui-lg-3 ui-sm-4">
+        <label>Seu número</label>
+        <p>{{ invoice.SeuNumero }}</p>
+      </div>
+      <div class="ui-g-6 ui-lg-3 ui-sm-4">
+        <label>Email</label>
+        <p>{{ invoice.Email }}</p>
+      </div>
+      <div class="ui-g-6 ui-lg-3 ui-sm-4">
+        <label>Valor</label>
+        <p>{{ invoice.Valor }}</p>
+      </div>
+      <div class="ui-g-6 ui-lg-3 ui-sm-4">
+        <label>Nosso número</label>
+        <p>{{ invoice.NossoNumero }}</p>
+      </div>
+      <div class="ui-g-6 ui-lg-3 ui-sm-4">
+        <label>Vencido</label>
+        <p>{{ invoice.EstaVencido }}</p>
+      </div>
+      <div class="ui-g-6 ui-lg-3 ui-sm-4">
+        <label>Cancelado</label>
+        <p>{{ invoice.Cancelado }}</p>
+      </div>
+      <div class="ui-g-6 ui-lg-3 ui-sm-4">
+        <label>Data de emissão</label>
+        <p>{{ invoice.Emissao }}</p>
+      </div>
+      <div class="ui-g-6 ui-lg-3 ui-sm-4">
+        <label>Vencimento</label>
+        <p>{{ invoice.Vencimento }}</p>
+      </div>
+      <div class="ui-g-6 ui-lg-4 ui-sm-6">
+        <label>Url do boleto </label>
+        <p>{{ invoice.Url }}</p>
+      </div>
+    </div>
+    <div class="ui-g">
+      <div class="ui-g-6 ui-lg-3 ui-sm-6">
+        <label>Linha digitavel</label>
+        <p>{{ invoice.LinhaDigitavel }}</p>
+      </div>
+      <div class="ui-g-6 ui-lg-3 ui-sm-6">
+        <label>Mensagem</label>
+        <p>{{ invoice.Linha1 }} {{ invoice.Linha2 }}</p>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <p-button type="button" styleClass="ui-button-secondary" (onClick)="btnGoBack()" label="Voltar"></p-button>
+  </p-footer>
+</p-panel>

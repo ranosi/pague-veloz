@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { EmissaoBoletoComponent } from './emissao-boleto/emissao-boleto.component';
 import { ConsultaBoletoComponent } from './consulta-boleto/consulta-boleto.component';
 import { TopoComponent } from './topo/topo.component';
+import { DetalheBoletoComponent } from './detalhe-boleto/detalhe-boleto.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmissaoBoletoComponent,
     ConsultaBoletoComponent,
-    TopoComponent
+    TopoComponent,
+    DetalheBoletoComponent
   ],
   imports: [
     BrowserModule,

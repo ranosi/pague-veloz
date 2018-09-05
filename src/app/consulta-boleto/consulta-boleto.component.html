@@ -151,7 +151,7 @@
             <th *ngFor="let col of columns">
               {{col.header}}
             </th>
-            <th style="width: 10em"></th>
+            <th style="width: 18em"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -160,6 +160,7 @@
               {{rowData[col.field]}}
             </td>
             <td>
+              <p-button type="button" styleClass="ui-button-primary" (onClick)="detail(rowData)" label="Ver boleto"></p-button>
               <p-button type="button" styleClass="ui-button-info" (onClick)="delete(rowData)" label="Deletar"></p-button>
             </td>
           </tr>

@@ -20,6 +20,7 @@ nav {
     color: #fff;
     font-weight: 700;
     text-decoration: none;
+    &:hover { color: #fff;}
   }
 }
 label {
@@ -40,23 +41,24 @@ p-button {
   margin-right: 15px;
 }
 .ui-radiobutton,
-.ui-radiobutton-label {
+body .ui-radiobutton-label {
   vertical-align: top;
   display: inline-block;
 }
-.ui-radiobutton-label {
+body .ui-radiobutton-label {
   margin-right: 10px;
 }
 .ui-dropdown label.ui-dropdown-label {
   padding: 10px;
 }
-.ui-messages-error {
-  color: #ab1a0f;
-  background: none;
-  border-color: #ffcbc8;
+.ui-message {
   border: none;
   padding: 5px 0;
   margin: 0;
+}
+.ui-messages-error {
+  color: #ab1a0f;
+  background: none;
 }
 .is-invalid, .is-invalid-date input {
   border: 1px solid #ab1a0f;
