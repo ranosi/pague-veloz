@@ -1,0 +1,99 @@
+<p-panel>
+  <p-header>
+    <h1 class="title--main" style="font-size: 20px">Inclusão de boleto</h1>
+    <span style="font-size: 16px">Preencha as informações abaixo para gerar um novo boleto.</span>
+  </p-header>
+  <form [formGroup]="formInvoice">
+    <div class="ui-g">
+      <div class="ui-g-4 ui-md-6">
+        <label for="sacado">Sacado</label>
+        <input pInputText type="text" name="sacado" formControlName="sacado" id="sacado" maxlength="50" required [ngClass]="{'is-invalid': (submitted && form.sacado.errors) }">
+        <p-message severity="error" text="Informe o nome do sacado." *ngIf="submitted && form.sacado.errors"></p-message>
+      </div>
+      <div class="ui-g-4 ui-md-6">
+        <label for="cpfCnpjSacado">Documento (CPF/CNPJ)</label>
+        <input pInputText type="text" name="cpfCnpjSacado" formControlName="cpfCnpjSacado" id="cpfCnpjSacado" [pValidateOnly]="true" pKeyFilter="pnum" maxlength="20" required [ngClass]="{'is-invalid': (submitted && form.sacado.errors) }">
+        <p-message severity="error" text="Informe um CPF ou CNPJ válido.." *ngIf="submitted && form.cpfCnpjSacado.errors"></p-message>
+      </div>
+      <div class="ui-g-4 ui-md-6">
+        <label for="seuNumero">Seu número</label>
+        <input pInputText type="text" name="seuNumero" formControlName="seuNumero" maxlength="30" pKeyFilter="num" id="seuNumero">
+      </div>
+      <div class="ui-g-4 ui-md-6">
+        <label for="valor">Valor</label>
+        <input pInputText currencyMask [options]="{ align: 'left', prefix: 'R$ ', thousands: '.', decimal: ',', allowNegative: 'false' }" type="text" name="valor" formControlName="valor" maxlength="15" pKeyFilter="pnum" id="valor" [ngClass]="{'is-invalid': (submitted && form.sacado.errors) }">
+        <p-message severity="error" text="Informe o valor da cobrança." *ngIf="submitted && form.valor.errors"></p-message>
+      </div>
+      <div class="ui-g-4 ui-md-6">
+          <label for="linha1">Mensagem</label>
+          <input pInputText type="text" name="linha1" formControlName="linha1" maxlength="250" id="linha1">
+      </div>
+      <div class="ui-g-4 ui-md-6" style="padding-top: 33px;">
+          <input pInputText type="text" name="linha2" formControlName="linha2" maxlength="250" id="linha2">
+      </div>
+      <div class="ui-g-4 ui-md-6">
+        <label for="parcela">Parcela</label>
+        <input pInputText type="text" name="parcela" formControlName="parcela" maxlength="7" pKeyFilter="pint" id="parcela">
+      </div>
+      <div class="ui-g-4 ui-md-6">
+        <label for="email">E-mail</label>
+        <input pInputText type="text" name="email" formControlName="email" pKeyFilter="email" maxlength="30" id="email" [ngClass]="{'is-invalid': (submitted && form.sacado.errors) }">
+        <p-message severity="error" text="Informe um e-mail válido." *ngIf="submitted && form.email.errors"></p-message>
+      </div>
+      <div class="ui-g-4 ui-md-3">
+        <label for="vencimento">Vencimento</label>
+        <p-calendar formControlName="vencimento" name="vencimento" [locale]="pt" [showIcon]="true" [minDate]="minDate" dateFormat="dd/mm/yy" [ngClass]="{'is-invalid-date': (submitted && form.sacado.errors) }"></p-calendar>
+        <div style="display: block">
+          <p-message severity="error" text="Informe a data de vencimento." *ngIf="submitted && form.vencimento.errors"></p-message>
+        </div>
+      </div>
+      <div class="ui-g-4 ui-md-3">
+        <label for="dataEnvioEmail">Data do envio para e-mail</label>
+        <p-calendar formControlName="dataEnvioEmail" [locale]="pt" [showIcon]="true" name="dataEnvioEmail" dateFormat="dd/mm/yy"></p-calendar>
+      </div>
+      <div class="ui-g-4 ui-md-6">
+        <label for="pdf">Gerar em PDF</label>
+        <p-checkbox [formControl]="formInvoice.controls['pdf']" binary="true"></p-checkbox>
+      </div>
+    </div>
+
+  </form>
+  <p-footer>
+    <p-button type="submit" styleClass="ui-button-success" label="Gerar boleto" (onClick)="submitCreatePayment()"></p-button>
+    <p-button type="button" styleClass="ui-button-info" (onClick)="btnClearForm($event)" label="Limpar"></p-button>
+    <p-button type="button" styleClass="ui-button-secondary" (onClick)="btnGoBack($event)" label="Voltar"></p-button>
+  </p-footer>
+
+  <p-toast key="success" position="center" (onClose)="closeToast()" [modal]="true" [baseZIndex]="5000" closable="false">
+      <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+              <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+              <h3>{{message.summary}}</h3>
+              <p>{{message.detail}}</p>
+          </div>
+          <div class="ui-g ui-fluid">
+              <div class="ui-g-6">
+                  <button type="button" pButton (click)="confirmToast()" label="Sim" class="ui-button-success"></button>
+              </div>
+              <div class="ui-g-6">
+                  <button type="button" pButton (click)="closeToast()" label="Não" class="ui-button-secondary"></button>
+              </div>
+          </div>
+      </ng-template>
+  </p-toast>
+
+  <p-toast key="error" position="center" (onClose)="erroToast()" [modal]="true" [baseZIndex]="5000" closable="false">
+      <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+              <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+              <h3>{{message.summary}}</h3>
+              <p>{{message.detail}}</p>
+          </div>
+          <div class="ui-g ui-fluid">
+              <div class="ui-g-12">
+                  <button type="button" pButton (click)="erroToast()" label="Fechar" class="ui-button-success"></button>
+              </div>
+          </div>
+      </ng-template>
+  </p-toast>
+</p-panel>

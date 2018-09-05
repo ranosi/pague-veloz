@@ -1,0 +1,171 @@
+<p-panel>
+  <p-header>
+    <h1 class="title--main" style="font-size: 20px">Consulta de boleto</h1>
+    <span style="font-size: 16px">Consulte boletos emitidos</span>
+  </p-header>
+  <form [formGroup]="formQueryInvoice">
+    <div class="ui-g">
+      <div class="ui-g-4 ui-lg-3 ui-md-3">
+        <label for="dataInicio">Data início</label>
+        <p-calendar
+          formControlName="dataInicio"
+          name="dataInicio"
+          [showIcon]="true"
+          dateFormat="dd/mm/yy"
+          [locale]="pt"
+          >
+        </p-calendar>
+      </div>
+      <div class="ui-g-4 ui-lg-3 ui-md-3">
+        <label for="dataFim">Data final</label>
+        <p-calendar
+          formControlName="dataFim"
+          name="dataFim"
+          [showIcon]="true"
+          [minDate]="dateMinimum"
+          dateFormat="dd/mm/yy"
+          [locale]="pt"
+          >
+        </p-calendar>
+      </div>
+      <div class="ui-g-4 ui-lg-6 ui-md-6">
+        <label for="status">Status</label>
+        <p-dropdown
+          [options]="status"
+          formControlName="selectedStatus"
+          [style]="{'width':'100%'}"
+          >
+        </p-dropdown>
+      </div>
+      <div class="ui-g-4 ui-lg-6 ui-md-6">
+        <label for="documento">Documento</label>
+        <input
+          pInputText
+          type="text"
+          name="documento"
+          formControlName="documento"
+          id="documento"
+          >
+      </div>
+      <div class="ui-g-4 ui-lg-6 ui-md-6">
+        <label for="seuNumero">Seu número</label>
+        <input
+          pInputText
+          type="text"
+          name="seuNumero"
+          formControlName="seuNumero"
+          maxlength="30"
+          pKeyFilter="num"
+          id="seuNumero"
+          >
+      </div>
+      <div class="ui-g-4 ui-lg-3 ui-md-3">
+        <label for="incluirCancelados">Incluir cancelados</label>
+        <p-radioButton
+          name="incluirCancelados"
+          value="true"
+          label="Sim"
+          formControlName="incluirCancelados"
+          >
+        </p-radioButton>
+        <p-radioButton
+          name="incluirCancelados"
+          value="false"
+          label="Não"
+          formControlName="incluirCancelados"
+          >
+        </p-radioButton>
+      </div>
+      <div class="ui-g-4 ui-lg-3 ui-md-3">
+        <label for="apenasAgendados">Apenas agendados</label>
+        <p-radioButton
+          name="apenasAgendados"
+          value="true"
+          label="Sim"
+          formControlName="apenasAgendados"
+          >
+        </p-radioButton>
+        <p-radioButton
+          name="apenasAgendados"
+          value="false"
+          label="Não"
+          formControlName="apenasAgendados"
+          >
+        </p-radioButton>
+      </div>
+      <div class="ui-g-4 ui-lg-6 ui-md-6">
+        <label for="naoVisualizados">Não visualizados</label>
+        <p-radioButton
+          name="naoVisualizados"
+          value="true"
+          label="Sim"
+          formControlName="naoVisualizados"
+          >
+        </p-radioButton>
+        <p-radioButton
+          name="naoVisualizados"
+          value="false"
+          label="Não"
+          formControlName="naoVisualizados"
+          >
+        </p-radioButton>
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <p-button type="submit" styleClass="ui-button-success" (onClick)="submitQueryInvoice()" label="Aplicar"></p-button>
+    <p-button type="button" styleClass="ui-button-info" (onClick)="btnClearForm($event)" label="Limpar"></p-button>
+  </p-footer>
+</p-panel>
+
+<p-panel [showHeader]="false" [style]="{'margin-top':'30px'}" *ngIf="invoiceTotal === 0">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="ui-messages ui-widget ui-corner-all ng-tns-c9-24 ui-messages-info ng-trigger ng-trigger-messageAnimation ng-star-inserted" style="display: block; transform: translateY(0px); opacity: 1;">
+        <span class="ui-messages-icon pi pi-info-circle"></span>
+        <ul class="ng-tns-c9-24">
+          <li class="ng-tns-c9-24 ng-star-inserted">
+            <span class="ui-messages-summary ng-tns-c9-24 ng-star-inserted">Não encontrado</span><br>
+            <span class="ui-messages-detail ng-tns-c9-24 ng-star-inserted">Não foi possível encontrar nenhum resultado para sua pesquisa. Revise os filtros e busque novamente.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</p-panel>
+
+
+<p-panel header="Boletos encontrados" [style]="{'margin-top':'30px'}" *ngIf="invoiceTotal > 0">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table
+        [columns]="cols"
+        [value]="invoices"
+        [rows]="itemsPerPage"
+        [paginator]="true"
+        [responsive]="true"
+        dataKey="Id"
+      >
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns">
+              {{col.header}}
+            </th>
+            <th style="width: 10em"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns">
+              {{rowData[col.field]}}
+            </td>
+            <td>
+              <p-button type="button" styleClass="ui-button-info" (onClick)="delete(rowData)" label="Deletar"></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <p-confirmDialog header="Confirmar" icon="pi pi-exclamation-triangle" width="425" acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
+</p-panel>

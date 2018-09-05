@@ -1,0 +1,63 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+nav {
+  border-bottom: 5px solid #0da7d4;
+  background: #177c9a;
+}
+.nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  &-item {
+    padding: 15px 20px 15px 10px;
+    margin-right: 5px;
+    display: inline-block;
+    border-right: 1px solid #0da7d4;
+  }
+  &-link {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
+label {
+  font-size: 14px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 10px;
+}
+.ui-inputtext {
+  width: 100%;
+  height: 38px;
+}
+.ui-panel .ui-panel-footer {
+  padding: .85em 1.30em;
+  margin-top: 15px;
+}
+p-button {
+  margin-right: 15px;
+}
+.ui-radiobutton,
+.ui-radiobutton-label {
+  vertical-align: top;
+  display: inline-block;
+}
+.ui-radiobutton-label {
+  margin-right: 10px;
+}
+.ui-dropdown label.ui-dropdown-label {
+  padding: 10px;
+}
+.ui-messages-error {
+  color: #ab1a0f;
+  background: none;
+  border-color: #ffcbc8;
+  border: none;
+  padding: 5px 0;
+  margin: 0;
+}
+.is-invalid, .is-invalid-date input {
+  border: 1px solid #ab1a0f;
+}

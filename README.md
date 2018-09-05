@@ -1,27 +1,32 @@
-# Pagueveloz
+# Pague Veloz
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
+Projeto desenvolvido para o desafio da empresa Pague Veloz.
+Consiste em um CRUD para gerenciamento de boletos utilizando a API da plataforma.
 
-## Development server
+## Instalação
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Clone o projeto para sua máquina
+```
+git clone git@github.com:ranosi/pague-veloz.git
+```
+Com o [NodeJs]() instalado, vá até a pasta do projeto e faça a instalação dos pacotes através do comando:
+```
+npm install
+```
 
-## Code scaffolding
+Após concluir a instalação dos pacotes do projeto, execute o comando:
+```
+npm start
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+O browser abrirá automaticamente com a página principal. 
+Caso o browser não inicie, vá até o endereço http://localhost:4200/ .
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Stack
+[NodeJS](https://nodejs.org/en/)
+[Angular 6](https://angular.io/)
+[Typescript](https://www.typescriptlang.org/)
+[Javascript](https://pt.wikipedia.org/wiki/JavaScript)
+[SASS](http://sass-lang.com)
+[HTML 5](https://en.wikipedia.org/wiki/HTML5)
+[PrimeNg](https://www.primefaces.org/primeng/)
